@@ -28,7 +28,7 @@ For each .h5 file
   ├── bvp   # ground truth PPG signal, shape [N]. You may not include it during training.
 ```
  
- Since Contrast-Phys is an unsuerpvised method, `bvp` is not needed for training. You may not include `bvp` in the training set, but `bvp` is needed in the test set for performance evaluation. You can download one .h5 file example [here](https://1drv.ms/u/s!AtCpzthip8c9-xlaJwlaK2zU6sfn?e=OH9klk).
+ Since Contrast-Phys is an unsupervised method, `bvp` is not needed for training. You may not include `bvp` in the training set, but `bvp` is needed in the test set for performance evaluation. You can download one .h5 file example [here](https://1drv.ms/u/s!AtCpzthip8c9-xlaJwlaK2zU6sfn?e=OH9klk).
 
 
 ## Training and testing
