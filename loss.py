@@ -11,36 +11,51 @@ class ContrastLoss(nn.Module):
         self.ST_sampling = ST_sampling(delta_t, K, Fs, high_pass, low_pass) # spatiotemporal sampler
         self.distance_func = nn.MSELoss(reduction = 'mean') # mean squared error for comparing two PSDs
 
-    def compare_samples_pos(self, list_a, list_b):
-        total_distance = 0.
-        M = 0
-        for i in range(len(list_a)):
-            for j in range(len(list_b)):
-                if i != j:
+    def compare_samples(self, list_a, list_b, exclude_same=False):
+        if exclude_same:
+            total_distance = 0.
+            M = 0
+            for i in range(len(list_a)):
+                for j in range(len(list_b)):
+                    if i != j:
+                        total_distance += self.distance_func(list_a[i], list_b[j])
+                        M += 1
+        else:
+            total_distance = 0.
+            M = 0
+            for i in range(len(list_a)):
+                for j in range(len(list_b)):
                     total_distance += self.distance_func(list_a[i], list_b[j])
                     M += 1
         return total_distance / M
-    
-    def compare_samples_neg(self, list_a, list_b):
-        total_distance = 0.
-        M = 0
-        for i in range(len(list_a)):
-            for j in range(len(list_b)):
-                total_distance += self.distance_func(list_a[i], list_b[j])
-                M += 1
-        return total_distance / M
 
-    def forward(self, model_output):   
+    def forward(self, model_output):
         samples = self.ST_sampling(model_output)
 
         # positive loss
-        pos_loss = (self.compare_samples_pos(samples[0], samples[0]) + self.compare_samples_pos(samples[1], samples[1])) / 2
+        pos_loss = (self.compare_samples(samples[0], samples[0], exclude_same=True) + self.compare_samples(samples[1], samples[1], exclude_same=True)) / 2
 
         # negative loss           
-        neg_loss = -self.compare_samples_neg(samples[0], samples[1])
+        neg_loss = -self.compare_samples(samples[0], samples[1])
 
         # overall contrastive loss
         loss = pos_loss + neg_loss
+
+        # two sets of rPPG samples
+        # samples = self.ST_sampling(model_output) # a list with length 2 including rPPG samples from the first video and rPPG samples from the second video
+        # samples_ = self.ST_sampling(model_output)
+
+        # We list combinations for both pos. loss (pull rPPG samples from the same video) and neg. loss (repel rPPG samples from two different videos).
+        # positive loss
+        # pos_loss = (self.compare_samples(samples[0], samples_[0]) + self.compare_samples(samples[1], samples_[1])
+        #     + self.compare_samples(samples_[0], samples_[0], exclude_same=True) + self.compare_samples(samples_[1], samples_[1], exclude_same=True)
+        #     + self.compare_samples(samples[0], samples[0], exclude_same=True) + self.compare_samples(samples[1], samples[1], exclude_same=True)) / 6
+        # # negative loss           
+        # neg_loss = -(self.compare_samples(samples[0], samples[1]) + self.compare_samples(samples_[0], samples_[1])
+        #     + self.compare_samples(samples[0], samples_[1]) + self.compare_samples(samples_[0], samples[1])) / 4
+
+        # # overall contrastive loss
+        # loss = pos_loss + neg_loss
 
         # return overall loss, positive loss, and negative loss
         return loss, pos_loss, neg_loss

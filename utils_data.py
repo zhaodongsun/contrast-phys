@@ -9,7 +9,7 @@ from scipy.signal import butter, filtfilt
 def UBFC_LU_split():
     # split UBFC dataset into training and testing parts
     # the function returns the file paths for the training set and test set.
-    # TODO: if you want to train on your dataset, you should define your train-test split function.
+    # TODO: if you want to train on another dataset, you should define new train-test split function.
     
     h5_dir = '../datasets/UBFC_h5'
     train_list = []
@@ -25,7 +25,7 @@ def UBFC_LU_split():
                 train_list.append(h5_dir+'/%d.h5'%(subject))
 
     return train_list, val_list    
-
+    
 class H5Dataset(Dataset):
 
     def __init__(self, train_list, T):

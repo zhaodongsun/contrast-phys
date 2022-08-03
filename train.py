@@ -32,6 +32,7 @@ def my_config():
     # hyperparams for model training
     total_epoch = 30 # total number of epochs for training the model
     lr = 1e-5 # learning rate
+    in_ch = 3 # TODO: number of input video channels, in_ch=3 for RGB videos, in_ch=1 for NIR videos.
 
     # hyperparams for ST-rPPG block
     fs = 30 # video frame rate, TODO: modify it if your video frame rate is not 30 fps.
@@ -46,12 +47,12 @@ def my_config():
     ex.observers.append(FileStorageObserver(result_dir))
 
 @ex.automain
-def my_main(_run, total_epoch, T, S, lr, result_dir, fs, delta_t, K):
+def my_main(_run, total_epoch, T, S, lr, result_dir, fs, delta_t, K, in_ch):
 
     exp_dir = result_dir + '/%d'%(int(_run._id)) # store experiment recording to the path
 
     # get the training and test file path list by spliting the dataset
-    train_list, test_list = UBFC_LU_split() # TODO: you should split your own dataset for training and testing
+    train_list, test_list = UBFC_LU_split() # TODO: you should define your function to split your dataset for training and testing
     np.save(exp_dir+'/train_list.npy', train_list)
     np.save(exp_dir+'/test_list.npy', test_list)
 
@@ -61,7 +62,7 @@ def my_main(_run, total_epoch, T, S, lr, result_dir, fs, delta_t, K):
                             shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
     
     # define the model and loss
-    model = PhysNet(S).to(device).train()
+    model = PhysNet(S, in_ch=in_ch).to(device).train()
     loss_func = ContrastLoss(delta_t, K, fs, high_pass=40, low_pass=250)
 
     # define irrelevant power ratio

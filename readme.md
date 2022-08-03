@@ -24,10 +24,11 @@ The original videos are firstly preprocessed to crop the face. Facial landmarks 
 For each .h5 file
 ```
   X.h5
-  ├── imgs  # face videos with cropped faces, shape [N, 128, 128, 3]
-  ├── bvp   # ground truth PPG signal, not for training, only for testing, shape [N]
+  ├── imgs  # face videos with cropped faces, shape [N, 128, 128, C]. N is the temporal length. C is the color channel, for RGB videos, C=3, for NIR videos, C=1.
+  ├── bvp   # ground truth PPG signal, shape [N]. You may not include it during training.
 ```
- Since Contrast-Phys is an unsuerpvised method, `bvp` is not needed for training. You can download one .h5 file example [here](https://1drv.ms/u/s!AtCpzthip8c9-xlaJwlaK2zU6sfn?e=IErMaq).
+ 
+ Since Contrast-Phys is an unsuerpvised method, `bvp` is not needed for training. You may not include `bvp` in the training set, but `bvp` is needed in the test set for performance evaluation. You can download one .h5 file example [here](https://1drv.ms/u/s!AtCpzthip8c9-xlaJwlaK2zU6sfn?e=OH9klk).
 
 
 ## Training and testing
@@ -46,7 +47,7 @@ After training, you can test the model on the test set. Please make sure .h5 fil
 ```
 python test.py with train_exp_num=1
 ```
-The predicted rPPG signals and ground truth PPG signals are saved in `./results/1/1`. You can use the function `hr_fft` in `utils_sig.py` to get heart rates.
+The predicted rPPG signals and ground truth PPG signals are saved in `./results/1/1`. You can filter the rPPG signals by `butter_bandpass` function with lowcut=0.6 and highcut=4 and get heart rates by `hr_fft` function in `utils_sig.py`.
 
 ## Demo
 

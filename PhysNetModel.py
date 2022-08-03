@@ -10,13 +10,13 @@ import torch.nn.functional as F
 # the output is an ST-rPPG block rather than a rPPG signal.
 # -------------------------------------------------------------------------------------------------------------------
 class PhysNet(nn.Module):
-    def __init__(self, S=2):
+    def __init__(self, S=2, in_ch=3):
         super().__init__()
 
         self.S = S # S is the spatial dimension of ST-rPPG block
 
         self.start = nn.Sequential(
-            nn.Conv3d(in_channels=3, out_channels=32, kernel_size=(1, 5, 5), stride=1, padding=(0, 2, 2)),
+            nn.Conv3d(in_channels=in_ch, out_channels=32, kernel_size=(1, 5, 5), stride=1, padding=(0, 2, 2)),
             nn.BatchNorm3d(32),
             nn.ELU()
         )
@@ -84,10 +84,10 @@ class PhysNet(nn.Module):
     def forward(self, x):
         means = torch.mean(x, dim=(2, 3, 4), keepdim=True)
         stds = torch.std(x, dim=(2, 3, 4), keepdim=True)
-        x = (x - means) / stds # (B, 3, T, 128, 128)
+        x = (x - means) / stds # (B, C, T, 128, 128)
  
         parity = []
-        x = self.start(x) # (B, 3, T, 128, 128)
+        x = self.start(x) # (B, C, T, 128, 128)
         x = self.loop1(x) # (B, 64, T, 64, 64)
         parity.append(x.size(2) % 2)
         x = self.encoder1(x) # (B, 64, T/2, 32, 32)
