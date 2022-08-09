@@ -15,7 +15,7 @@ def my_config():
     e = 29 # the model checkpoint at epoch e
     train_exp_num = 1 # the training experiment number
     train_exp_dir = './results/%d'%train_exp_num # training experiment directory
-    time_interval = 30 # evaluate 30s clips
+    time_interval = 30 # get rppg for 30s video clips, too long clips might cause out of memory
 
     ex.observers.append(FileStorageObserver(train_exp_dir))
 
