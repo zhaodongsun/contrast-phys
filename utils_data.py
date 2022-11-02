@@ -37,7 +37,7 @@ class H5Dataset(Dataset):
 
     def __getitem__(self, idx):
         with h5py.File(self.train_list[idx], 'r') as f:
-            img_length = np.min([f['imgs'].shape[0], f['bvp'].shape[0]])
+            img_length = f['imgs'].shape[0]
 
             idx_start = np.random.choice(img_length-self.T)
 
