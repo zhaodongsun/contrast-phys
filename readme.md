@@ -1,6 +1,10 @@
 # Contrast-Phys: Unsupervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast
 
-This is the official code repository of our ECCV 2022 paper "Contrast-Phys: Unsupervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast"
+This is the official code repository of our ECCV 2022 paper "Contrast-Phys: Unsupervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast". We incorporate prior knowledge about remote photoplethysmography (rPPG) into contrastive learning to achieve unsupervised rPPG training. The method does not require any ground truth for training.
+
+[Paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136720488.pdf), [Poster](https://github.com/zhaodongsun/contrast-phys/releases/download/aux/0205.pdf), [Video](https://github.com/zhaodongsun/contrast-phys/releases/download/aux/0205.mp4)
+
+![](https://github.com/zhaodongsun/contrast-phys/releases/download/aux/all.png)
 
 ## Prerequisite
 
@@ -56,7 +60,7 @@ python test.py with train_exp_num=1
 The predicted rPPG signals and ground truth PPG signals are saved in `./results/1/1`. You can filter the rPPG signals by `butter_bandpass` function with lowcut=0.6 and highcut=4 and get heart rates by `hr_fft` function in `utils_sig.py`.
 
 ## Citation
-[Paper Link](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136720488.pdf)
+
 ```
 @inproceedings{sun2022contrast,
   title={Contrast-Phys: Unsupervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast},
