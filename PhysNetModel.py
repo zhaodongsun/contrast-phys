@@ -109,5 +109,5 @@ class PhysNet(nn.Module):
                 x_list.append(x[:,:,:,a,b]) # (B, 1, T)
 
         x = sum(x_list)/(self.S*self.S) # (B, 1, T)
-        X = torch.cat(x_list+[x], 1) # (B, N, T), flatten all spatial signals to the second dimension
+        X = torch.cat(x_list+[x], 1) # (B, M, T), flatten all spatial signals to the second dimension
         return X

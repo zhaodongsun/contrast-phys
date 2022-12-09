@@ -70,7 +70,7 @@ class ST_sampling(nn.Module):
         self.K = K # the number of rPPG samples at each spatial position
         self.norm_psd = CalculateNormPSD(Fs, high_pass, low_pass)
 
-    def forward(self, input): # input: (2, N, T)
+    def forward(self, input): # input: (2, M, T)
         samples = []
         for b in range(input.shape[0]): # loop over videos (totally 2 videos)
             samples_per_video = []
