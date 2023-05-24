@@ -57,7 +57,7 @@ After training, you can test the model on the test set. Please make sure .h5 fil
 ```
 python test.py with train_exp_num=1
 ```
-The predicted rPPG signals and ground truth PPG signals are saved in `./results/1/1`. You can filter the rPPG signals by `butter_bandpass` function with lowcut=0.6 and highcut=4 and get heart rates by `hr_fft` function in `utils_sig.py`.
+The predicted rPPG signals and ground truth PPG signals are saved in `./results/1/1`. You can filter the rPPG signals by `butter_bandpass` function with lowcut=0.6 and highcut=4 and get heart rates by `hr_fft` function in `utils_sig.py`. To get the ground truth heart rates, you should first filter ground truth PPG signals by `butter_bandpass` function with lowcut=0.6 and highcut=4 and get ground truth heart rates by `hr_fft` function.
 
 ## Citation
 
