@@ -59,7 +59,7 @@ def my_main(_run, total_epoch, T, S, lr, result_dir, fs, delta_t, K, in_ch):
     # define the dataloader
     dataset = H5Dataset(train_list, T) # please read the code about H5Dataset when preparing your dataset
     dataloader = DataLoader(dataset, batch_size=2, # two videos for contrastive learning
-                            shuffle=True, num_workers=4, pin_memory=True, drop_last=True)
+                            shuffle=True, num_workers=4, pin_memory=True, drop_last=True) # TODO: If you run the code on Windows, please remove num_workers=4.
     
     # define the model and loss
     model = PhysNet(S, in_ch=in_ch).to(device).train()
