@@ -17,7 +17,11 @@ The original videos are firstly preprocessed to crop the face. Facial landmarks 
 ```
 ./FeatureExtraction -f <VideoFileName> -out_dir <dir> -2Dfp
 ```
- 
+If you are using OpenFace on Windows, you may use the following for loop to get the landmarks for multiple videos. You can download the Windows Version of OpenFace [here](https://1drv.ms/u/s!AtCpzthip8c9_RsyovL9Ngfd6OKq?e=b1HtC4).
+```
+for v in video_list:
+    os.system('.\\openface\\FeatureExtraction.exe -f %s -out_dir %s -2Dfp'%(v, landmarks_folder))
+```
 We first get the minimum and maximum horizontal and vertical coordinates of the landmarks to locate the central facial point for each frame. The bounding box size is 1.2 times the vertical coordinate range of landmarks from the first frame and is fixed for the following frames. After getting the central facial point of each frame and the size of the bounding box, we crop the face from each frame. The cropped faces are resized to $128 \times 128$, which are ready to be fed into our model. Video frames in a video should be stored in a .h5 file. Please refer to `preprocessing.py` for more details. For example, for UBFC-rPPG dataset, the processed dataset should like
 
 ```
