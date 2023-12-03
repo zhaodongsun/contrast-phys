@@ -6,6 +6,10 @@ This is the official code repository of our ECCV 2022 paper "Contrast-Phys: Unsu
 
 ![](https://github.com/zhaodongsun/contrast-phys/releases/download/aux/all.png)
 
+## Demo
+
+Please go to [Demo](/demo) folder for More details.
+
 ## Prerequisite
 
 Please check `requirement.txt` for the required Python libraries.
@@ -77,6 +81,3 @@ The predicted rPPG signals and ground truth PPG signals are saved in `./results/
   organization={Springer}
 }
 ```
-## Demo
-
-Please check `demo` folder. More details will be provided.
