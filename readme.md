@@ -14,10 +14,12 @@ Please check `requirement.txt` for the required Python libraries.
 
 The original videos are firstly preprocessed to crop the face. Facial landmarks are generated using [OpenFace](https://github.com/TadasBaltrusaitis/OpenFace). I use the following OpenFace commend to get the facial landmark (.csv file) from each video. For more details, you could check [here](https://github.com/TadasBaltrusaitis/OpenFace/wiki/Command-line-arguments).
 
+If you are using OpenFace on Linux, you may use the following command in Bash to get the landmark from one video. You can use Bash For loop to get landmarks from multiple videos.
 ```
 ./FeatureExtraction -f <VideoFileName> -out_dir <dir> -2Dfp
 ```
-If you are using OpenFace on Windows, you may use the following for loop to get the landmarks for multiple videos. You can download the Windows Version of OpenFace [here](https://1drv.ms/u/s!AtCpzthip8c9_RsyovL9Ngfd6OKq?e=b1HtC4).
+
+If you are using OpenFace on Windows, you may use the following For loop in Python to get the landmarks for multiple videos. You can download the Windows Version of OpenFace [here](https://1drv.ms/u/s!AtCpzthip8c9_RsyovL9Ngfd6OKq?e=b1HtC4).
 ```
 for v in video_list:
     os.system('.\\openface\\FeatureExtraction.exe -f %s -out_dir %s -2Dfp'%(v, landmarks_folder))
