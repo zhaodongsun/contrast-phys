@@ -1,6 +1,10 @@
-# Contrast-Phys: Unsupervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast
+# Contrast-Phys and Contrast-Phys+
 
-This is the official code repository of our ECCV 2022 paper "Contrast-Phys: Unsupervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast". We incorporate prior knowledge about remote photoplethysmography (rPPG) into contrastive learning to achieve unsupervised rPPG training. The method does not require any ground truth for training.
+**Update: The code for weakly-supervised rPPG method (Contrast-Phys+) has been released. Please check the `contrast-phys+` folder.**
+
+This is the official code repository of our ECCV 2022 paper "Contrast-Phys: Unsupervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast" and our paper "Contrast-Phys+: Unsupervised and Weakly-supervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast". 
+
+We incorporate prior knowledge about remote photoplethysmography (rPPG) into contrastive learning to achieve unsupervised rPPG training. The method does not require any ground truth for training.
 
 [Paper](https://www.ecva.net/papers/eccv_2022/papers_ECCV/papers/136720488.pdf), [Poster](https://github.com/zhaodongsun/contrast-phys/releases/download/aux/0205.pdf), [Video](https://github.com/zhaodongsun/contrast-phys/releases/download/aux/0205.mp4)
 
