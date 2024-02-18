@@ -1,6 +1,6 @@
 # Contrast-Phys and Contrast-Phys+
 
-**Update: The code for weakly-supervised rPPG method (Contrast-Phys+) has been released. Please check the `contrast-phys+` folder.**
+**Update: The paper for [Contrast-Phys+](https://arxiv.org/abs/2309.06924) has been accepted by TPAMI. The code for weakly-supervised rPPG method (Contrast-Phys+) has been released. Please check the `contrast-phys+` folder.**
 
 This is the official code repository of our ECCV 2022 paper "Contrast-Phys: Unsupervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast" and our paper "Contrast-Phys+: Unsupervised and Weakly-supervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast". 
 
@@ -76,12 +76,17 @@ The predicted rPPG signals and ground truth PPG signals are saved in `./results/
 ## Citation
 
 ```
+@article{sun2024,
+  title={Contrast-Phys+: Unsupervised and Weakly-supervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast},
+  author={Sun, Zhaodong and Li, Xiaobai},
+  journal={TPAMI},
+  year={2024}
+}
+
 @inproceedings{sun2022contrast,
   title={Contrast-Phys: Unsupervised Video-based Remote Physiological Measurement via Spatiotemporal Contrast},
   author={Sun, Zhaodong and Li, Xiaobai},
   booktitle={European Conference on Computer Vision},
-  pages={492--510},
   year={2022},
-  organization={Springer}
 }
 ```
